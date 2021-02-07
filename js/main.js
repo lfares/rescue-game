@@ -16,6 +16,7 @@ function start() {
     var enemy1Velocity = 5;
     var enemy2Velocity = 3;
     var friendVelocity = 1;
+    var shootVelocity = 10;
     var enemy1PositionY = parseInt(Math.random() * 330);
     var canShoot = true;
 
@@ -63,7 +64,31 @@ function start() {
     }
 
     function shoot() {
-        
+        if (canShoot == true) {
+            canShoot = false;
+
+            playerY = parseInt($("#player").css("top"));
+            playerX = parseInt($("#player").css("left"));
+            shootY = playerY + 37;
+            shootX = playerX + 190;
+
+            $("#background-game").append("<div id='shoot'></div>");
+            $("#shoot").css("top", shootY);
+            $("#shoot").css("left", shootX);
+
+            var timeShooting = window.setInterval(executeShooting, 30);
+        }
+        function executeShooting() {
+            shootX = parseInt($("#shoot").css("left"));
+            $("#shoot").css("left", shootX+shootVelocity);
+    
+            if (shootX > 900) {
+                window.clearInterval(timeShooting);
+                timeShooting = null;
+                $("#shoot").remove();
+                canShoot = true;
+            }
+        }
     }
 
     function moveEnemy1() {
