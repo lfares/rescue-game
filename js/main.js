@@ -14,12 +14,17 @@ function start() {
         shoot: 83
     }
     var enemy1Velocity = 5;
+    var enemy2Velocity = 3;
+    var friendVelocity = 1;
     var enemy1PositionY = parseInt(Math.random() * 330);
+    var canShoot = true;
 
     function loop() {
         moveBackground();
         movePlayer();
         moveEnemy1();
+        moveEnemy2();
+        moveFriend();
     }
     
     function moveBackground() {
@@ -53,8 +58,12 @@ function start() {
         }
 
         if (game.keywordPress[keywords.shoot]) {
-            
+            shoot();
         }
+    }
+
+    function shoot() {
+        
     }
 
     function moveEnemy1() {
@@ -67,6 +76,24 @@ function start() {
             // Restart position y
             enemy1PositionY = parseInt(Math.random() * 330);
             $("#enemy1").css("top", enemy1PositionY);
+        }
+    }
+
+    function moveEnemy2() {
+        positionX = parseInt($("#enemy2").css("left"));
+        $("#enemy2").css("left", positionX-enemy2Velocity);
+
+        if (positionX <= 150) {
+            $("#enemy2").css("left", 755);
+        }
+    }
+
+    function moveFriend() {
+        positionX = parseInt($("#friend").css("left"));
+        $("#friend").css("left", positionX+friendVelocity);
+
+        if (positionX > 906) {
+            $("#friend").css("left", 0);
         }
     }
 

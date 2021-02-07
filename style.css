@@ -108,3 +108,10 @@ body {
     background-image: url(./imgs/friend.png);
     animation: play-friend .9s steps(12) infinite;
 }
+
+#shoot {
+    width: 50px;
+    height: 8px;
+    position: absolute;
+    background-image: url(./imgs/shoot.png);
+}
